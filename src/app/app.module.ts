@@ -8,9 +8,13 @@ import { HeaderComponent } from './components/header/header.component';
 import { SharedModule } from './shared/shared.module';
 import { HomeModule } from './home/home.module';
 import { MaterialModule } from './material/material.module';
+import { HttpClientModule } from '@angular/common/http';
+import { AdminComponent } from './admin/components/admin/admin.component';
+import { AdminModule } from './admin/admin.module';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent],
+  declarations: [AppComponent, HeaderComponent, SidebarComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -18,6 +22,8 @@ import { MaterialModule } from './material/material.module';
     BrowserAnimationsModule,
     SharedModule,
     HomeModule,
+    HttpClientModule,
+    AdminModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

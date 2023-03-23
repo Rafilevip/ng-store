@@ -1,0 +1,10 @@
+<div class="sidebar" [ngClass]="{ 'sidebar--open': isOpen }">
+  <button class="button" [routerLink]="['/admin']" (click)="closeSidebar()">
+    Admin
+  </button>
+</div>
+<div
+  class="backdrop"
+  (click)="closeSidebar()"
+  [ngClass]="{ 'backdrop--open': isOpen }"
+></div>
