@@ -1,20 +1,21 @@
-<div class="card">
+<div class="card" *ngIf="product">
   <mat-card class="example-card">
     <mat-card-header>
       <ng-content select=".header"></ng-content>
     </mat-card-header>
     <img
       mat-card-image
-      src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-      alt="Photo of a Shiba Inu"
+      class="card__img"
+      src="{{ product.thumbnail }}"
+      alt="{{ product.description }}"
     />
-    <mat-card-content>
-      <ng-content select=".title"></ng-content>
-      <ng-content select=".general"></ng-content>
+    <mat-card-content class="card__dsc">
+      {{ product.description }}
     </mat-card-content>
-    <mat-card-actions>
+    <mat-card-actions class="card__price">
+      {{ product.price | currency }}
       <button mat-button>LIKE</button>
-      <button mat-button>SHARE</button>
+      <button mat-button>ADD TO CART</button>
     </mat-card-actions>
   </mat-card>
 </div>

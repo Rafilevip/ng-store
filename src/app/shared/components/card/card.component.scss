@@ -1,9 +1,14 @@
 .card {
-  width: 50%;
-  height: 100px;
-  background-size: cover;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  @media screen and (max-width: 1366px) {
-    background-size: 100%;
+  img {
+    width: auto;
+    height: 50%;
+  }
+
+  &__price {
+    color: #3936d9;
+    font-size: 22px;
+  }
+  button {
+    width: auto;
   }
 }

@@ -2,16 +2,25 @@
   <mat-toolbar color="primary">
     <div class="header__container">
       <div class="header__left">
-        <button mat-icon-button>
-          <mat-icon>menu</mat-icon>
+        <button mat-icon-button (click)="openSidebar()">
+          <mat-icon> menu</mat-icon>
         </button>
         <span>NG Store </span>
       </div>
-      <div class="heder__right">
+      <div class="header__right">
         <button mat-icon-button>
           <mat-icon> shopping_cart </mat-icon>
+        </button>
+      </div>
+      <div class="header">
+        <button mat-icon-button [routerLink]="['admin']">
+          <mat-icon> Admin </mat-icon>
         </button>
       </div>
     </div>
   </mat-toolbar>
 </header>
+<div class="sidebar__container">
+  <app-sidebar [isOpen]="sidebarOpen" (onCloseSidebar)="closeSidebar()">
+  </app-sidebar>
+</div>
