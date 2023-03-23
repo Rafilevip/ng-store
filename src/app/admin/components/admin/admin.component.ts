@@ -4,6 +4,8 @@ import { IProduct } from 'src/app/shared/models/product.interface';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { MatDialog } from '@angular/material/dialog';
+import { ProductFormComponent } from 'src/app/shared/components/product-form/product-form.component';
 
 @Component({
   selector: 'app-admin',
@@ -11,7 +13,10 @@ import { MatSort } from '@angular/material/sort';
   styleUrls: ['./admin.component.scss'],
 })
 export class AdminComponent {
-  constructor(private productService: Productyervice) {}
+  constructor(
+    private productService: Productyervice,
+    public dialog: MatDialog
+  ) {}
 
   public dataSource: MatTableDataSource<IProduct> = new MatTableDataSource();
 
@@ -21,7 +26,7 @@ export class AdminComponent {
   @ViewChild(MatSort) sort?: MatSort;
 
   ngOnInit() {
-    this.productService.getProducts().subscribe((data: any) => {
+    this.productService.getProducts$().subscribe((data: any) => {
       this.displayedColumns = [
         'id',
         'title',
@@ -35,6 +40,7 @@ export class AdminComponent {
       if (this.sort) this.dataSource.sort = this.sort;
       if (this.paginator) this.dataSource.paginator = this.paginator;
     });
+    this.productService.fetchProducts();
   }
 
   applyFilter(event: Event) {
@@ -56,5 +62,13 @@ export class AdminComponent {
     });
     this.dataSource.data.splice(index, 1);
     this.dataSource._updateChangeSubscription();
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(ProductFormComponent, {});
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+    });
   }
 }
