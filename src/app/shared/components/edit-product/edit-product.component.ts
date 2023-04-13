@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Productyervice } from 'src/app/product/services/product.service';
 import { IProduct } from '../../models';
 
@@ -9,7 +10,8 @@ import { IProduct } from '../../models';
   styleUrls: ['./edit-product.component.scss'],
 })
 export class EditProductComponent {
-  public product: IProduct[] = [];
+  private sub: Subscription = new Subscription();
+  public product?: IProduct;
 
   constructor(
     private route: ActivatedRoute,
@@ -17,10 +19,17 @@ export class EditProductComponent {
   ) {}
 
   ngOnInit(): void {
+    debugger;
     const id = this.route.snapshot.paramMap.get('id');
-    this.productService.getProductsById(Number(id)).subscribe((data: any) => {
-      console.log(data.id);
-      this.product = data.thumbnail;
-    });
+    this.product = this.productService.getProductsById(Number(id));
+    console.log(this.product);
+
+    // setTimeout(() => {
+    //   this.product = this.productService.getProductsById(19);
+    // }, 4000);
+  }
+  ngOnDestroy() {
+    console.log('');
+    this.sub.unsubscribe();
   }
 }

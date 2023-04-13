@@ -1,1 +1,52 @@
-<p>product-form works1!</p>
+<div class="product-from" *ngIf="productForm">
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    <p>
+      <img mat-card-image class="home__product" src="{{ product.thumbnail }}" />
+    </p>
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>title</mat-label>
+        <input matInput formControlName="title" />
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>description</mat-label>
+        <input matInput formControlName="description" />
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>stock</mat-label>
+        <input matInput formControlName="stock" />
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>price</mat-label>
+        <input matInput formControlName="price" />
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>rating</mat-label>
+        <input matInput formControlName="rating" />
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>category</mat-label>
+        <input matInput formControlName="category" />
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>brand</mat-label>
+        <input matInput formControlName="brand" />
+      </mat-form-field>
+    </p>
+
+    <button mat-raised-button type="submit" color="primary">Submit</button>
+  </form>
+</div>

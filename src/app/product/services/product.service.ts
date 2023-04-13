@@ -1,6 +1,7 @@
+import { trigger } from '@angular/animations';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { Routes } from 'src/app/core/http/Api';
 import { StorageService } from 'src/app/core/srevices/storage.service';
 import { IProduct } from 'src/app/shared/models';
@@ -15,7 +16,11 @@ export class Productyervice {
     private storageService: StorageService
   ) {}
 
-  private productsSubjects$: Subject<IProduct[]> = new Subject();
+  // private productsSubjects$: Subject<IProduct[]> = new Subject();
+
+  private productsSubjects$: BehaviorSubject<IProduct[]> = new BehaviorSubject(
+    []
+  );
 
   public getProducts$(): Observable<IProduct[]> {
     this.fetchProducts();
@@ -34,10 +39,23 @@ export class Productyervice {
     }
   }
 
-  // public getProducts(): Observable<IProduct[]> {
-  //   return this.http.get<IProduct[]>(Routes['allProducts']);
+  public getProducts(): Observable<IProduct[]> {
+    return this.http.get<IProduct[]>(Routes['allProducts']);
+  }
+  // public getProductsById(id: number): Observable<IProduct[]> {
+  //   return this.http.get<IProduct[]>(Routes['singleProduct'](id));
   // }
-  public getProductsById(id: number): Observable<IProduct[]> {
-    return this.http.get<IProduct[]>(Routes['singleProduct'](id));
+
+  public getProductsById(id: number): IProduct {
+    this.fetchProducts();
+    const productList: any = this.productsSubjects$.value;
+    const productIndex: number = productList.products.findIndex(
+      (product) => product.id === id
+    );
+    if (productList.products[productIndex]) {
+      return productList.products[productIndex];
+    } else {
+      return null;
+    }
   }
 }

@@ -1,2 +1,7 @@
-<img mat-card-image class="home__product" src="{{ product }}" />
-<app-product-form></app-product-form>
+<!-- <img mat-card-image class="home__product" src="{{ product }}" /> -->
+<div class="edit-product" *ngIf="product; else noProduct">
+  <app-product-form [product]="product"></app-product-form>
+</div>
+<ng-template #noProduct>
+  <h1>No product</h1>
+</ng-template>

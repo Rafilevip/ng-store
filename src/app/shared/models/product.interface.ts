@@ -11,7 +11,6 @@ export interface IProduct {
   stock: number;
   discountPercentage: number;
 }
-// export interface IRating {
-//   rate: number;
-//   count: number;
-// }
+export interface ProductResponse {
+  products: Array<IProduct>;
+}
